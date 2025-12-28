@@ -1,50 +1,58 @@
 "use client";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from "@heroui/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export const AcmeLogo = () => {
-    return (
-        <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-            <path
-                clipRule="evenodd"
-                d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-                fill="currentColor"
-                fillRule="evenodd"
-            />
-        </svg>
-    );
+export const Logo = () => {
+    return <Image src="/logo_fire.svg" width={26} height={26} alt="logo" priority />;
 };
 
 export default function Header() {
+    const pathname = usePathname();
+
+    const navItems = [
+        { href: "/", label: "Рецепты" },
+        { href: "/ingredients", label: "Ингредиенты" },
+        { href: "/about", label: "О нас" },
+    ];
+
     return (
         <Navbar>
             <NavbarBrand>
-                <AcmeLogo />
-                <p className="font-bold text-inherit">ACME</p>
+                <Link
+                    href="/"
+                    className="text-white flex gap-3 hover:text-orange-400 transition-colors duration-200  ">
+                    <Logo />
+                    <p className="font-bold text-inherit"> Kitchen </p>
+                </Link>
             </NavbarBrand>
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Features
-                    </Link>
-                </NavbarItem>
-                <NavbarItem isActive>
-                    <Link aria-current="page" href="#">
-                        Customers
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Integrations
-                    </Link>
-                </NavbarItem>
+
+            <NavbarContent className="hidden sm:flex gap-10" justify="center">
+                {navItems.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                        <NavbarItem key={item.href + item.label}>
+                            <Link
+                                color="foreground"
+                                href={item.href}
+                                className={`${
+                                    isActive ? "text-orange-400" : "text-foreground"
+                                } hover:text-orange-500 transition-colors duration-200 font-semibold`}>
+                                {item.label.toUpperCase()}
+                            </Link>
+                        </NavbarItem>
+                    );
+                })}
             </NavbarContent>
+
             <NavbarContent justify="end">
                 <NavbarItem className="hidden lg:flex">
-                    <Link href="#">Login</Link>
+                    <Link href="#">Логин</Link>
                 </NavbarItem>
                 <NavbarItem>
                     <Button as={Link} color="primary" href="#" variant="flat">
-                        Sign Up
+                        Регистрация
                     </Button>
                 </NavbarItem>
             </NavbarContent>
