@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import Header from "./components/UI/header";
+import Header from "../components/UI/header";
+import { siteConfig } from "@/config/site.config";
 
 const interSans = Inter({
     variable: "--font-inter-sans",
@@ -11,11 +12,8 @@ const interSans = Inter({
 });
 
 export const metadata: Metadata = {
-    title: {
-        template: "%s | Kitchen",
-        default: "",
-    },
-    description: "Kitchen",
+    title: siteConfig.title,
+    description: siteConfig.description,
 };
 
 export default function RootLayout({
