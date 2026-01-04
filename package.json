@@ -1,43 +1,43 @@
 {
-  "name": "next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@heroui/form": "^2.1.29",
-    "@heroui/input": "^2.4.30",
-    "@heroui/modal": "^2.2.26",
-    "@heroui/navbar": "^2.2.27",
-    "@heroui/react": "^2.8.7",
-    "@heroui/system": "2.4.25",
-    "@heroui/theme": "2.4.25",
-    "framer-motion": "12.23.26",
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  },
-  "ignoreScripts": [
-    "sharp",
-    "unrs-resolver"
-  ],
-  "trustedDependencies": [
-    "sharp",
-    "unrs-resolver"
-  ]
+    "name": "next",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint"
+    },
+    "dependencies": {
+        "@heroui/form": "^2.1.29",
+        "@heroui/input": "^2.4.30",
+        "@heroui/modal": "^2.2.26",
+        "@heroui/navbar": "^2.2.27",
+        "@heroui/react": "^2.8.7",
+        "@heroui/system": "2.4.25",
+        "@heroui/theme": "2.4.25",
+        "framer-motion": "12.23.26",
+        "next": "16.1.1",
+        "react": "19.2.3",
+        "react-dom": "19.2.3"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "babel-plugin-react-compiler": "1.0.0",
+        "eslint": "^9",
+        "eslint-config-next": "16.1.1",
+        "tailwindcss": "^4",
+        "typescript": "^5"
+    },
+    "ignoreScripts": [
+        "sharp",
+        "unrs-resolver"
+    ],
+    "trustedDependencies": [
+        "sharp",
+        "unrs-resolver"
+    ]
 }
