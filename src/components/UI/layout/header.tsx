@@ -37,7 +37,11 @@ export default function Header() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
 
     return (
-        <Navbar className={`border-b-1 backdrop-blur h-[${layoutConfig.headerHeight}]`}>
+        <Navbar
+            className={`border-b-1 backdrop-blur`}
+            style={{
+                height: `${layoutConfig.headerHeight} `,
+            }}>
             <NavbarBrand>
                 <Link
                     href="/"
