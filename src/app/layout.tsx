@@ -26,7 +26,12 @@ export default function RootLayout({
             <body className={`${interSans.variable} antialiased`}>
                 <Providers>
                     <Header />
-                    {children}
+                    <main className="flex flex-col h-[calc(100vh-60px-80px)] items-center justify-start">
+                        {children}
+                    </main>
+                    <footer className="flex justify-center items-center h-20">
+                        <p>{siteConfig.description}</p>
+                    </footer>
                 </Providers>
             </body>
         </html>

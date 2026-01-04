@@ -30,7 +30,7 @@ export default function Header() {
     };
 
     return (
-        <Navbar className="border-b-1 backdrop-blur">
+        <Navbar className="border-b-1 backdrop-blur h-15">
             <NavbarBrand>
                 <Link
                     href="/"
