@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import Header from "../components/UI/header";
+import Header from "../components/UI/layout/header";
 import { siteConfig } from "@/config/site.config";
+import { layoutConfig } from "@/config/layout.config";
 
 const interSans = Inter({
     variable: "--font-inter-sans",
@@ -26,10 +27,12 @@ export default function RootLayout({
             <body className={`${interSans.variable} antialiased`}>
                 <Providers>
                     <Header />
-                    <main className="flex flex-col h-[calc(100vh-60px-80px)] items-center justify-start">
+                    <main
+                        className={`flex flex-col w-full items-center justify-start h-[calc(100vh-${layoutConfig.headerHeight}-${layoutConfig.footerHeight})]`}>
                         {children}
                     </main>
-                    <footer className="flex justify-center items-center h-20">
+                    <footer
+                        className={`flex justify-center items-center h-[${layoutConfig.footerHeight}]`}>
                         <p>{siteConfig.description}</p>
                     </footer>
                 </Providers>
