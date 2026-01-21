@@ -9,7 +9,7 @@ import LoginModal from "../modals/login.modal";
 import Link from "next/link";
 import Image from "next/image";
 import { signOutFunc } from "@/actions/sign-out";
-import { useSession } from "next-auth/react";
+import { useAuthStore } from "@/store/auth.store";
 
 export const Logo = () => {
     return <Image src="/logo_fire.svg" width={26} height={26} alt={siteConfig.name} priority />;
@@ -17,8 +17,7 @@ export const Logo = () => {
 
 export default function Header() {
     const pathname = usePathname();
-    const { data: session, status } = useSession();
-    const isAuth = status === "authenticated";
+    const { isAuth, session, status, setAuthState } = useAuthStore();
 
     const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -31,9 +30,7 @@ export default function Header() {
                     <Link
                         color="foreground"
                         href={item.href}
-                        className={`${
-                            isActive ? "text-orange-400" : "text-foreground"
-                        } hover:text-orange-500 transition-colors duration-200 font-semibold px-3`}>
+                        className={`${isActive ? "text-orange-400" : "text-foreground"} hover:text-orange-500 transition-colors duration-200 font-semibold px-3`}>
                         {item.label.toUpperCase()}
                     </Link>
                 </NavbarItem>
@@ -42,7 +39,12 @@ export default function Header() {
     };
 
     const handleSignOut = async () => {
-        await signOutFunc();
+        try {
+            await signOutFunc();
+        } catch (error) {
+            console.log("error: ", error);
+        }
+        setAuthState("unauthenticated", null);
     };
 
     const customHeaderButtonStyles =
@@ -89,7 +91,9 @@ export default function Header() {
 
             <NavbarContent justify="end">
                 {isAuth && <p className="hidden xl:flex ">{session?.user?.email}</p>}
-                {!isAuth ? (
+                {status === "loading" ? (
+                    <p>Загрузка..</p>
+                ) : !isAuth ? (
                     <>
                         <NavbarItem className="hidden xl:flex ">
                             <Button
