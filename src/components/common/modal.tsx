@@ -12,7 +12,13 @@ interface IProps {
 
 export default function CustomModal({ isOpen, onClose, title, children, size = "xs" }: IProps) {
     return (
-        <Modal isOpen={isOpen} onClose={onClose} size={size}>
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            size={size}
+            classNames={{
+                wrapper: "items-center !important",
+            }}>
             <ModalContent>
                 <ModalHeader className="border-b">
                     <h3 className="text-xl text-background font-semibold"> {title} </h3>
