@@ -8,6 +8,8 @@ import RegistrationModal from "../modals/registration.modal";
 import LoginModal from "../modals/login.modal";
 import Link from "next/link";
 import Image from "next/image";
+import { signOutFunc } from "@/actions/sign-out";
+import { useSession } from "next-auth/react";
 
 export const Logo = () => {
     return <Image src="/logo_fire.svg" width={26} height={26} alt={siteConfig.name} priority />;
@@ -15,6 +17,9 @@ export const Logo = () => {
 
 export default function Header() {
     const pathname = usePathname();
+    const { data: session, status } = useSession();
+    const isAuth = status === "authenticated";
+
     const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
 
@@ -34,6 +39,10 @@ export default function Header() {
                 </NavbarItem>
             );
         });
+    };
+
+    const handleSignOut = async () => {
+        await signOutFunc();
     };
 
     const customHeaderButtonStyles =
@@ -79,26 +88,43 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarContent justify="end">
-                <NavbarItem className="hidden xl:flex ">
-                    <Button
-                        as={Link}
-                        href="#"
-                        variant="flat"
-                        onPress={() => setIsRegistrationOpen(true)}
-                        className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
-                        Регистрация
-                    </Button>
-                </NavbarItem>
-                <NavbarItem>
-                    <Button
-                        as={Link}
-                        href="#"
-                        variant="flat"
-                        onPress={() => setIsLoginOpen(true)}
-                        className={`${customHeaderButtonStyles} bg-orange-400 hover:bg-orange-500 hover:rounded-sm`}>
-                        Войти
-                    </Button>
-                </NavbarItem>
+                {isAuth && <p className="hidden xl:flex ">{session?.user?.email}</p>}
+                {!isAuth ? (
+                    <>
+                        <NavbarItem className="hidden xl:flex ">
+                            <Button
+                                as={Link}
+                                href="#"
+                                variant="flat"
+                                onPress={() => setIsRegistrationOpen(true)}
+                                className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
+                                Регистрация
+                            </Button>
+                        </NavbarItem>
+
+                        <NavbarItem>
+                            <Button
+                                as={Link}
+                                href="#"
+                                variant="flat"
+                                onPress={() => setIsLoginOpen(true)}
+                                className={`${customHeaderButtonStyles} bg-orange-400 hover:bg-orange-500 hover:rounded-sm`}>
+                                Войти
+                            </Button>
+                        </NavbarItem>
+                    </>
+                ) : (
+                    <NavbarItem>
+                        <Button
+                            as={Link}
+                            href="#"
+                            variant="flat"
+                            onPress={handleSignOut}
+                            className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
+                            Выйти
+                        </Button>
+                    </NavbarItem>
+                )}
             </NavbarContent>
 
             <RegistrationModal
