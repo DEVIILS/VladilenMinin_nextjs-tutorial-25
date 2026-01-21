@@ -8,6 +8,7 @@ import { layoutConfig } from "@/config/layout.config";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth/auth";
 import AppLoader from "@/hoc/app-loader";
+import Title from "@/components/UI/layout/title";
 
 const interSans = Inter({
     variable: "--font-inter-sans",
@@ -27,17 +28,15 @@ export default async function RootLayout({
 }>) {
     const session = await auth();
     return (
-        <html lang="en">
-            <body className={`${interSans.variable} antialiased`}>
+        <html lang="en" className="h-full">
+            <body className={`${interSans.variable} antialiased min-h-screen flex flex-col`}>
                 <Providers>
                     <SessionProvider session={session}>
                         <AppLoader>
                             <Header />
                             <main
-                                className={`flex flex-col w-full items-center justify-start `}
-                                style={{
-                                    height: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
-                                }}>
+                                className={`flex-auto flex flex-col w-full items-center justify-start xl:max-w-5xl mx-auto`}>
+                                <Title />
                                 {children}
                             </main>
                             <footer

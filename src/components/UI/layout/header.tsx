@@ -30,7 +30,7 @@ export default function Header() {
                     <Link
                         color="foreground"
                         href={item.href}
-                        className={`${isActive ? "text-orange-400" : "text-foreground"} hover:text-orange-500 transition-colors duration-200 font-semibold px-3`}>
+                        className={`${isActive ? "text-orange-400" : "text-foreground"} hover:text-orange-500 transition-colors duration-200 font-semibold px-3 select-none`}>
                         {item.label.toUpperCase()}
                     </Link>
                 </NavbarItem>
@@ -90,7 +90,7 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarContent justify="end">
-                {isAuth && <p className="hidden xl:flex ">{session?.user?.email}</p>}
+                {isAuth && <p className="hidden xl:flex text-orange-400">{session?.user?.email}</p>}
                 {status === "loading" ? (
                     <p>Загрузка..</p>
                 ) : !isAuth ? (
