@@ -1,3 +1,4 @@
+import PageContent from "@/components/common/page-content";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function IngredientsPage() {
     return (
-        <div className="flex h-screen items-center justify-center font-sans dark:bg-black">
-            Page Ingredients
+        <div className="mx-10">
+            <PageContent />
         </div>
     );
 }
