@@ -21,8 +21,9 @@ export default function LoginForm({ onClose }: IProps) {
         e.preventDefault();
         console.log("Form submitted: ", formData);
 
-        const result = await signInWithCredentials(formData.email, formData.password);
-        console.log("result: ", result);
+        await signInWithCredentials(formData.email, formData.password);
+
+        window.location.reload();
 
         onClose();
     };
