@@ -6,6 +6,9 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    --scrollColorBar: #ff6900;
+    --scrollColorBarHover: #ff6900;
+    --scrollColorBarActive: #ff6900;
 }
 
 @theme inline {
@@ -19,10 +22,49 @@
         --background: #0a0a0a;
         --foreground: #ededed;
     }
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    * {
+        scrollbar-color: var(--scrollColorBar);
+    }
 }
 
-body {
+body,
+html {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-inter-sans);
+}
+
+/* Кастомный скроллбар для всей страницы */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollColorBar);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollColorBarHover);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--scrollColorBarActive);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
 }
