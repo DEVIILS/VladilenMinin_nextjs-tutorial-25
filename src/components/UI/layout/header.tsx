@@ -66,6 +66,54 @@ export default function Header() {
         ],
     };
 
+    const isAuthShowUserEmail = isAuth && (
+        <p className="hidden xl:flex text-orange-400">{session?.user?.email}</p>
+    );
+    const isAuthRegistrationButton = (
+        <NavbarItem className="hidden xl:flex ">
+            <Button
+                as={Link}
+                href="#"
+                variant="flat"
+                onPress={() => setIsRegistrationOpen(true)}
+                className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
+                Регистрация
+            </Button>
+        </NavbarItem>
+    );
+    const isAuthLoginButton = (
+        <NavbarItem>
+            <Button
+                as={Link}
+                href="#"
+                variant="flat"
+                onPress={() => setIsLoginOpen(true)}
+                className={`${customHeaderButtonStyles} bg-orange-400 hover:bg-orange-500 hover:rounded-sm`}>
+                Войти
+            </Button>
+        </NavbarItem>
+    );
+    const isAuthExitButton = (
+        <NavbarItem>
+            <Button
+                as={Link}
+                href="#"
+                variant="flat"
+                onPress={handleSignOut}
+                className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
+                Выйти
+            </Button>
+        </NavbarItem>
+    );
+    const isAuthStatusPpl = !isAuth ? (
+        <>
+            {isAuthRegistrationButton}
+            {isAuthLoginButton}
+        </>
+    ) : (
+        isAuthExitButton
+    );
+
     return (
         <Navbar
             // className={`border-b-1 backdrop-blur`}
@@ -90,45 +138,8 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarContent justify="end">
-                {isAuth && <p className="hidden xl:flex text-orange-400">{session?.user?.email}</p>}
-                {status === "loading" ? (
-                    <p>Загрузка..</p>
-                ) : !isAuth ? (
-                    <>
-                        <NavbarItem className="hidden xl:flex ">
-                            <Button
-                                as={Link}
-                                href="#"
-                                variant="flat"
-                                onPress={() => setIsRegistrationOpen(true)}
-                                className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
-                                Регистрация
-                            </Button>
-                        </NavbarItem>
-
-                        <NavbarItem>
-                            <Button
-                                as={Link}
-                                href="#"
-                                variant="flat"
-                                onPress={() => setIsLoginOpen(true)}
-                                className={`${customHeaderButtonStyles} bg-orange-400 hover:bg-orange-500 hover:rounded-sm`}>
-                                Войти
-                            </Button>
-                        </NavbarItem>
-                    </>
-                ) : (
-                    <NavbarItem>
-                        <Button
-                            as={Link}
-                            href="#"
-                            variant="flat"
-                            onPress={handleSignOut}
-                            className={`${customHeaderButtonStyles} bg-transparent hover:border-1 border-orange-400/0 hover:border-orange-400 `}>
-                            Выйти
-                        </Button>
-                    </NavbarItem>
-                )}
+                {isAuthShowUserEmail}
+                {status === "loading" ? <p>Загрузка..</p> : isAuthStatusPpl}
             </NavbarContent>
 
             <RegistrationModal
