@@ -9,13 +9,13 @@ export default function PageContent() {
 
     const getBlockContent = () => {
         return pageContent.content.map((block) => {
-            return (
+            return block.textContent !== "" ? (
                 <div
                     key={block.textContent}
                     className="flex text-xl mb-5 bg-[#0e0e0e] p-5 rounded-2xl">
                     {block.textContent}
                 </div>
-            );
+            ) : null;
         });
     };
 
