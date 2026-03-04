@@ -19,7 +19,7 @@ export const siteConfig = {
         },
         "/ingredients": {
             title: "Ингредиенты",
-            content: [{ textContent: "Ингредиенты..." }],
+            content: [{ textContent: "" }],
         },
         "/about": {
             title: "Просто о вкусном",
